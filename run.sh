@@ -22,5 +22,5 @@ ANALSIS_OUT=/uufs/chpc.utah.edu/common/home/u1427155/assignments/GradBased_Highl
 FILE_IN=/uufs/chpc.utah.edu/common/home/u1427155/assignments/GradBased_Highlighting/data/failed.jsonl
 MODEL_CHECKPOINT=/scratch/general/vast/u1427155/cs6966/assignment1/models/microsoft/deberta-v3-base-finetuned-imdb/checkpoint-12500
 MODEL_OUT_DIR=/scratch/general/vast/u1427155/cs6966/assignment3/models
-mkdir -p ${OUT_DIR}
-python src/assignment_3.py --analsis_dir ${ANALSIS_OUT} --model_checkpoint ${MODEL_CHECKPOINT} --a1_analysis_file ${FILE_IN} --num_labels 2 --output_dir ${OUT_DIR} 
+mkdir -p ${MODEL_OUT_DIR}
+python src/assignment_3.py --analsis_dir ${ANALSIS_OUT} --model_checkpoint ${MODEL_CHECKPOINT} --a1_analysis_file ${FILE_IN} --num_labels "2" --output_dir ${ANALSIS_OUT}

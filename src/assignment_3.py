@@ -14,6 +14,7 @@ from transformers.pipelines import TextClassificationPipeline
 from transformers import AutoTokenizer
 from transformers import AutoModelForSequenceClassification
 from captum.attr import LayerIntegratedGradients, TokenReferenceBase
+from captum.attr import visualization as viz
 
 import matplotlib.pyplot as plt
 
@@ -47,10 +48,13 @@ class ExplainableTransformerPipeline():
         
         attr = attr_sum / torch.norm(attr_sum)
         
-        a = pd.Series(attr.numpy()[0][::-1], 
-                         index = self.__pipeline.tokenizer.convert_ids_to_tokens(inputs.detach().numpy()[0])[::-1])
+        a = pd.Series(attr.cpu().numpy()[0][::-1], 
+                         index = self.__pipeline.tokenizer.convert_ids_to_tokens(inputs.cpu().detach().numpy()[0])[::-1])
         
-        a.plot.barh(figsize=(10,20))
+        print(a)
+        #plt.figure(figsize=(10,100))
+        #plt.barh(self.__pipeline.tokenizer.convert_ids_to_tokens(inputs.cpu().detach().numpy()[0])[::-1], attr.cpu().numpy()[0][::-1])
+        a.plot.barh(figsize=(10,100))
         plt.savefig(outfile_path)
                       
     def explain(self, text: str, outfile_path: str):
